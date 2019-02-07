@@ -9,11 +9,11 @@ declare var google;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  title = 'Google Place v1.0.0';
+export class AppComponent implements OnInit, AfterViewChecked {
+  title = 'ATM Finder v1.0.0';
   _isLoading = false;
   @ViewChild(LocationListComponent) locationListChild: LocationListComponent;
-  locations = [];
+  private locations = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -35,22 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.initMap();
   }
 
-  ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => {
-      if (message.type === 'filtered-locations') {
-        this.getLocations(message.data['locations']);
-      }
-    });
-  }
-
-  ngAfterViewChecked() {
-    this._isLoading = this.locationListChild.isLoading;
-    this.changeDetector.detectChanges();
-  }
-
-  ngAfterViewInit() { }
-
-  initMap() {
+  private initMap() {
     if (this.locations.length > 0) {
       const lat = this.locations[0][1];
       const lng = this.locations[0][2];
@@ -75,5 +60,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         })(marker, count));
       }
     }
+  }
+
+  ngOnInit() {
+    this.dataService.currentMessage.subscribe(message => {
+      if (message.type === 'filtered-locations') {
+        this.getLocations(message.data['locations']);
+      }
+    });
+  }
+
+  ngAfterViewChecked() {
+    this._isLoading = this.locationListChild.isLoading;
+    this.changeDetector.detectChanges();
   }
 }

@@ -20,6 +20,15 @@ export class LocationListComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) { }
 
+  private invokeFilterEvent(locations) {
+    this.dataService.changeMessage({
+      type: 'filtered-locations',
+      data: {
+        locations: locations
+      }
+    });
+  }
+
   private getPlaces(message: IMessageType) {
     this.locations = [];
     this.isLoading = true;
@@ -31,16 +40,10 @@ export class LocationListComponent implements OnInit {
           this.errorMessage = response['error'];
         }
         this.isLoading = false;
-        this.dataService.changeMessage({
-          type: 'filtered-locations',
-          data: {
-            locations: this.locations
-          }
-        });
+        this.invokeFilterEvent(this.locations);
         this.cd.detectChanges();
       },
       error => {
-        console.log(error);
         this.isLoading = false;
       }
     );
