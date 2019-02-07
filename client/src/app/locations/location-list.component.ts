@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LocationListService } from './../common/location-list/location-list.service';
 import { DataService } from '../core/data/data.service';
 import { IMessageType } from './../core/data/data';
@@ -16,7 +16,8 @@ export class LocationListComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private locationListService: LocationListService
+    private locationListService: LocationListService,
+    private cd: ChangeDetectorRef
   ) { }
 
   private getPlaces(message: IMessageType) {
@@ -36,6 +37,7 @@ export class LocationListComponent implements OnInit {
             locations: this.locations
           }
         });
+        this.cd.detectChanges();
       },
       error => {
         console.log(error);
