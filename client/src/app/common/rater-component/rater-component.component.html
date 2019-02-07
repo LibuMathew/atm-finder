@@ -1,0 +1,3 @@
+<i class="material-icons" *ngFor="let number of numbers" [ngClass]="{'star': this.rating >= number}">
+  {{this.rating >= number ? 'star' : 'star_border'}}
+</i>

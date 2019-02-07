@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<mat-progress-bar *ngIf="_isLoading" mode="indeterminate"></mat-progress-bar>
+
+<div class="wrapper">
+
+    <div class="left c25">
+        <app-location-list></app-location-list>
+    </div>
+    <div class="right c75">
+        <div id="map"></div>
+    </div>
+
+</div>

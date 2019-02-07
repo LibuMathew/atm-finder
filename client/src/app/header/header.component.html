@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <span>ATM Finder</span>
+
+    <form class="search-form header-form-search">
+      <div class="row">
+        <div class="col-12">
+          <div class="search-auto-complete">
+            <input id="search-input" type="text" class="search-input" title="Search" name="pac-input" placeholder="Search ATM"></div>
+        </div>
+      </div>
+    </form>
+
+    <span class="header-spacer"></span>
+    <mat-icon class="header-icon" (click)="activatePermission()">gps_fixed</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

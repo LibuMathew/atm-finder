@@ -1,0 +1,20 @@
+<mat-list *ngIf="locations.length === 0 && errorMessage">
+  <mat-list-item class="mat-list-item-word-wrap error-block">
+    <mat-icon mat-list-icon>error_outline</mat-icon>
+    <h3 mat-line [innerText]="errorMessage" class="error-message"></h3>
+  </mat-list-item>
+</mat-list>
+
+<mat-list *ngIf="locations.length > 0">
+  <mat-list-item *ngFor="let location of locations">
+    <mat-icon mat-list-icon>atm</mat-icon>
+    <h4 mat-line>{{location.name}}</h4>
+    <p mat-line>
+      {{location.opening_hours?.open_now === true ? 'Opened' : 'Closed'}}
+      <span class="rater" *ngIf="location.user_ratings_total">
+        <app-rater-component [rating]="location.rating" max="5"></app-rater-component>
+        <span class="rater-count">({{location.user_ratings_total}})</span>
+      </span>
+    </p>
+  </mat-list-item>
+</mat-list>
